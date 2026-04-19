@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arcana Studio — Occult Science & Esoteric Arts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1510;
+    --parchment: #f5f0e8;
+    --parchment-dark: #ede6d6;
+    --parchment-mid: #f0ead8;
+    --gold: #b8912a;
+    --gold-light: #d4a93c;
+    --gold-pale: #f0e0b0;
+    --plum: #2e1a2e;
+    --plum-mid: #4a2d4a;
+    --dust: #8a7a6a;
+    --dust-light: #b0a090;
+    --crimson: #7a1f1f;
+    --body: 'Cormorant Garamond', Georgia, serif;
+    --display: 'Cinzel', serif;
+    --text: 'EB Garamond', Georgia, serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 18px;
+    line-height: 1.7;
+    cursor: default;
+    overflow-x: hidden;
+  }
+
+  /* Subtle grain texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(245, 240, 232, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(184, 145, 42, 0.2);
+    transition: background 0.3s;
+  }
+
+  .nav-logo {
+    font-family: var(--display);
+    font-size: 15px;
+    letter-spacing: 0.18em;
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 400;
+  }
+
+  .nav-logo span { color: var(--gold); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--display);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--dust);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-book {
+    font-family: var(--display);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--parchment);
+    background: var(--ink);
+    border: none;
+    padding: 10px 22px;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .nav-book:hover { background: var(--plum); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-symbol {
+    position: absolute;
+    width: 680px;
+    height: 680px;
+    opacity: 0.06;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: slowSpin 80s linear infinite;
+  }
+
+  @keyframes slowSpin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+  .hero-eyebrow {
+    font-family: var(--display);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 1s 0.2s forwards;
+  }
+
+  .hero h1 {
+    font-family: var(--display);
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    max-width: 760px;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 1s 0.4s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+    font-family: var(--display);
+  }
+
+  .hero-sub {
+    font-size: 19px;
+    font-weight: 300;
+    color: var(--dust);
+    max-width: 520px;
+    margin-bottom: 48px;
+    line-height: 1.8;
+    opacity: 0;
+    animation: fadeUp 1s 0.6s forwards;
+  }
+
+  .hero-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 1s 0.7s forwards;
+  }
+
+  .hero-divider::before,
+  .hero-divider::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.4;
+  }
+
+  .hero-divider-glyph {
+    color: var(--gold);
+    font-size: 18px;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 16px;
+    opacity: 0;
+    animation: fadeUp 1s 0.8s forwards;
+  }
+
+  .btn-dark {
+    font-family: var(--display);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--parchment);
+    background: var(--ink);
+    border: none;
+    padding: 14px 32px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-dark:hover { background: var(--plum); transform: translateY(-1px); }
+
+  .btn-outline {
+    font-family: var(--display);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid rgba(26,21,16,0.3);
+    padding: 14px 32px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-1px); }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 1s 1.2s forwards;
+  }
+
+  .scroll-hint span {
+    font-family: var(--display);
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--dust-light);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: var(--gold);
+    opacity: 0.4;
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { transform: scaleY(1); opacity: 0.4; }
+    50% { transform: scaleY(0.5); opacity: 0.1; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION WRAPPER ── */
+  section {
+    padding: 100px 48px;
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+  .full-width-section {
+    padding: 100px 48px;
+    width: 100%;
+  }
+
+  .section-label {
+    font-family: var(--display);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(26px, 3.5vw, 42px);
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 48px;
+  }
+
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  /* ── INTRO BAND ── */
+  .intro-band {
+    background: var(--plum);
+    color: var(--parchment);
+    padding: 80px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .intro-band::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.015) 40px,
+      rgba(255,255,255,0.015) 80px
+    );
+  }
+
+  .intro-band-inner {
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .intro-band blockquote {
+    font-family: var(--body);
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--parchment);
+    margin-bottom: 20px;
+  }
+
+  .intro-band cite {
+    font-family: var(--display);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* ── SERVICES ── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(26,21,16,0.1);
+    border: 1px solid rgba(26,21,16,0.1);
+  }
+
+  .service-item {
+    background: var(--parchment);
+    padding: 40px 32px;
+    transition: background 0.25s;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .service-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--gold);
+    transition: width 0.35s ease;
+  }
+
+  .service-item:hover { background: var(--parchment-dark); }
+  .service-item:hover::after { width: 100%; }
+
+  .service-glyph {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 20px;
+    opacity: 0.7;
+  }
+
+  .service-name {
+    font-family: var(--display);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .service-desc {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--dust);
+    line-height: 1.65;
+    margin-bottom: 20px;
+  }
+
+  .service-price {
+    font-family: var(--display);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .about-image-placeholder {
+    aspect-ratio: 3/4;
+    background: var(--parchment-dark);
+    border: 1px solid rgba(184,145,42,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-image-placeholder svg {
+    width: 200px;
+    height: 200px;
+    opacity: 0.12;
+  }
+
+  .about-image-label {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-family: var(--display);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--dust);
+    text-transform: uppercase;
+  }
+
+  .about-text p {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--dust);
+    line-height: 1.85;
+    margin-bottom: 24px;
+  }
+
+  .about-text p strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .about-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 32px;
+  }
+
+  .about-tag {
+    font-family: var(--display);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(184,145,42,0.4);
+    padding: 6px 14px;
+  }
+
+  /* ── PROCESS ── */
+  .process-band {
+    background: var(--parchment-mid);
+    border-top: 1px solid rgba(184,145,42,0.15);
+    border-bottom: 1px solid rgba(184,145,42,0.15);
+  }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    counter-reset: steps;
+  }
+
+  .process-step {
+    padding: 48px 32px;
+    border-right: 1px solid rgba(184,145,42,0.15);
+    position: relative;
+  }
+
+  .process-step:last-child { border-right: none; }
+
+  .step-number {
+    font-family: var(--display);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    opacity: 0.6;
+    margin-bottom: 16px;
+  }
+
+  .step-title {
+    font-family: var(--display);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .step-desc {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--dust);
+    line-height: 1.65;
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  .tcard {
+    border: 1px solid rgba(184,145,42,0.2);
+    padding: 40px;
+    position: relative;
+    background: var(--parchment);
+  }
+
+  .tcard::before {
+    content: '\201C';
+    font-family: var(--body);
+    font-size: 72px;
+    line-height: 1;
+    color: var(--gold);
+    opacity: 0.25;
+    position: absolute;
+    top: 16px;
+    left: 28px;
+  }
+
+  .tcard blockquote {
+    font-size: 17px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--dust);
+    line-height: 1.8;
+    margin-bottom: 24px;
+    padding-top: 20px;
+  }
+
+  .tcard-author {
+    font-family: var(--display);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+
+  .tcard-detail {
+    font-size: 13px;
+    color: var(--dust-light);
+    font-style: italic;
+  }
+
+  .tcard-stars {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 16px;
+  }
+
+  .star {
+    width: 12px;
+    height: 12px;
+    color: var(--gold);
+    fill: var(--gold);
+  }
+
+  /* ── BLOG PREVIEW ── */
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(26,21,16,0.08);
+    border: 1px solid rgba(26,21,16,0.08);
+  }
+
+  .blog-card {
+    background: var(--parchment);
+    padding: 36px 28px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .blog-card:hover { background: var(--parchment-dark); }
+
+  .blog-tag {
+    font-family: var(--display);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .blog-title {
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--ink);
+    margin-bottom: 12px;
+    letter-spacing: 0.02em;
+  }
+
+  .blog-excerpt {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--dust);
+    line-height: 1.65;
+    margin-bottom: 20px;
+  }
+
+  .blog-read {
+    font-family: var(--display);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ── BOOKING CTA ── */
+  .cta-section {
+    text-align: center;
+    padding: 120px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--parchment-dark);
+    z-index: -1;
+  }
+
+  .cta-symbol {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 32px;
+    opacity: 0.2;
+  }
+
+  .cta-section h2 {
+    font-family: var(--display);
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  .cta-section h2 em { font-style: italic; color: var(--gold); }
+
+  .cta-section p {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--dust);
+    max-width: 480px;
+    margin: 0 auto 40px;
+    line-height: 1.8;
+  }
+
+  /* ── NEWSLETTER ── */
+  .newsletter {
+    background: var(--ink);
+    padding: 80px 48px;
+    text-align: center;
+  }
+
+  .newsletter h3 {
+    font-family: var(--display);
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--parchment);
+    margin-bottom: 10px;
+  }
+
+  .newsletter p {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--dust-light);
+    margin-bottom: 32px;
+    font-style: italic;
+  }
+
+  .newsletter-form {
+    display: flex;
+    max-width: 440px;
+    margin: 0 auto;
+    gap: 0;
+  }
+
+  .newsletter-form input {
+    flex: 1;
+    padding: 14px 20px;
+    background: rgba(245,240,232,0.08);
+    border: 1px solid rgba(245,240,232,0.15);
+    border-right: none;
+    color: var(--parchment);
+    font-family: var(--body);
+    font-size: 16px;
+    outline: none;
+  }
+
+  .newsletter-form input::placeholder { color: rgba(245,240,232,0.3); font-style: italic; }
+  .newsletter-form input:focus { border-color: rgba(184,145,42,0.5); }
+
+  .newsletter-form button {
+    padding: 14px 24px;
+    background: var(--gold);
+    border: none;
+    color: var(--ink);
+    font-family: var(--display);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+
+  .newsletter-form button:hover { background: var(--gold-light); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--parchment-dark);
+    border-top: 1px solid rgba(184,145,42,0.2);
+    padding: 60px 48px 32px;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+
+  .footer-brand .logo {
+    font-family: var(--display);
+    font-size: 16px;
+    letter-spacing: 0.16em;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+
+  .footer-brand .logo span { color: var(--gold); }
+
+  .footer-brand p {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--dust);
+    line-height: 1.7;
+    max-width: 240px;
+  }
+
+  .footer-col h4 {
+    font-family: var(--display);
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-col ul li a {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--dust);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-col ul li a:hover { color: var(--gold); }
+
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 24px;
+    border-top: 1px solid rgba(184,145,42,0.15);
+  }
+
+  .footer-copy {
+    font-family: var(--display);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--dust-light);
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 20px;
+  }
+
+  .footer-social a {
+    font-family: var(--display);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--dust-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-social a:hover { color: var(--gold); }
+
+  /* ── BOOKING MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(26,21,16,0.7);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--parchment);
+    max-width: 520px;
+    width: 100%;
+    padding: 48px;
+    position: relative;
+    animation: modalIn 0.25s ease forwards;
+  }
+
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 20px; right: 24px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: var(--dust);
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .modal h2 {
+    font-family: var(--display);
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+
+  .modal-sub {
+    font-size: 15px;
+    color: var(--dust);
+    font-style: italic;
+    margin-bottom: 32px;
+  }
+
+  .form-row { margin-bottom: 20px; }
+
+  .form-row label {
+    display: block;
+    font-family: var(--display);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dust);
+    margin-bottom: 8px;
+  }
+
+  .form-row input,
+  .form-row select,
+  .form-row textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--parchment-dark);
+    border: 1px solid rgba(184,145,42,0.25);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+
+  .form-row input:focus,
+  .form-row select:focus,
+  .form-row textarea:focus { border-color: var(--gold); }
+
+  .form-row textarea { resize: vertical; min-height: 80px; }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .form-submit {
+    width: 100%;
+    padding: 14px;
+    background: var(--ink);
+    color: var(--parchment);
+    border: none;
+    font-family: var(--display);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s;
+  }
+
+  .form-submit:hover { background: var(--plum); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section, .full-width-section { padding: 70px 24px; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-image-placeholder { display: none; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .blog-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+    .newsletter-form { flex-direction: column; }
+    .newsletter-form input { border-right: 1px solid rgba(245,240,232,0.15); }
+    .hero-btns { flex-direction: column; align-items: center; }
+    .modal { padding: 32px 24px; }
+    .form-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Arcana <span>✦</span> Studio</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#journal">Journal</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#" class="nav-book" onclick="openModal(event)">Book a Reading</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <!-- Large rotating symbol in the background -->
+  <svg class="hero-bg-symbol" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="250" cy="250" r="230" stroke="#b8912a" stroke-width="1"/>
+    <circle cx="250" cy="250" r="180" stroke="#b8912a" stroke-width="0.5"/>
+    <circle cx="250" cy="250" r="80" stroke="#b8912a" stroke-width="1"/>
+    <polygon points="250,30 460,380 40,380" fill="none" stroke="#b8912a" stroke-width="1"/>
+    <polygon points="250,470 460,120 40,120" fill="none" stroke="#b8912a" stroke-width="1"/>
+    <line x1="250" y1="20" x2="250" y2="480" stroke="#b8912a" stroke-width="0.5"/>
+    <line x1="20" y1="250" x2="480" y2="250" stroke="#b8912a" stroke-width="0.5"/>
+    <line x1="73" y1="73" x2="427" y2="427" stroke="#b8912a" stroke-width="0.5"/>
+    <line x1="427" y1="73" x2="73" y2="427" stroke="#b8912a" stroke-width="0.5"/>
+    <circle cx="250" cy="250" r="12" stroke="#b8912a" stroke-width="1"/>
+    <circle cx="250" cy="20" r="4" fill="#b8912a"/>
+    <circle cx="250" cy="480" r="4" fill="#b8912a"/>
+    <circle cx="20" cy="250" r="4" fill="#b8912a"/>
+    <circle cx="480" cy="250" r="4" fill="#b8912a"/>
+  </svg>
+
+  <div class="hero-eyebrow">Occult Science &amp; Esoteric Arts</div>
+  <h1>Uncover the <em>hidden order</em><br>woven into your life</h1>
+  <p class="hero-sub">Astrology, tarot, numerology, and sacred geometry — ancient lenses for modern lives. Practiced with rigour. Offered with care.</p>
+
+  <div class="hero-divider">
+    <span class="hero-divider-glyph">✦</span>
+  </div>
+
+  <div class="hero-btns">
+    <a href="#" class="btn-dark" onclick="openModal(event)">Book a Session</a>
+    <a href="#services" class="btn-outline">Explore Services</a>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</div>
+
+<!-- INTRO BAND -->
+<div class="intro-band">
+  <div class="intro-band-inner">
+    <blockquote>"As above, so below — the cosmos speaks in symbols, and every life is a letter in its alphabet."</blockquote>
+    <cite>Hermetic Axiom</cite>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label reveal">Services</div>
+  <h2 class="section-title reveal">What I <em>offer</em></h2>
+
+  <div class="services-grid reveal">
+
+    <div class="service-item" onclick="openModal()">
+      <svg class="service-glyph" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="20" stroke="#b8912a" stroke-width="1"/>
+        <circle cx="24" cy="24" r="10" stroke="#b8912a" stroke-width="0.8"/>
+        <circle cx="24" cy="24" r="3" fill="#b8912a"/>
+        <line x1="24" y1="4" x2="24" y2="44" stroke="#b8912a" stroke-width="0.6"/>
+        <line x1="4" y1="24" x2="44" y2="24" stroke="#b8912a" stroke-width="0.6"/>
+        <line x1="9" y1="9" x2="39" y2="39" stroke="#b8912a" stroke-width="0.4"/>
+        <line x1="39" y1="9" x2="9" y2="39" stroke="#b8912a" stroke-width="0.4"/>
+      </svg>
+      <div class="service-name">Natal Chart Reading</div>
+      <p class="service-desc">A comprehensive map of your birth sky — personality, soul purpose, karmic patterns, and life themes decoded in depth.</p>
+      <div class="service-price">From ₹1,999 · 60 min</div>
+    </div>
+
+    <div class="service-item" onclick="openModal()">
+      <svg class="service-glyph" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="12" y="4" width="24" height="40" rx="1" stroke="#b8912a" stroke-width="1"/>
+        <line x1="17" y1="14" x2="31" y2="14" stroke="#b8912a" stroke-width="0.8"/>
+        <line x1="17" y1="20" x2="31" y2="20" stroke="#b8912a" stroke-width="0.8"/>
+        <line x1="17" y1="26" x2="31" y2="26" stroke="#b8912a" stroke-width="0.8"/>
+        <line x1="17" y1="32" x2="27" y2="32" stroke="#b8912a" stroke-width="0.8"/>
+        <circle cx="24" cy="8" r="2" stroke="#b8912a" stroke-width="0.6"/>
+      </svg>
+      <div class="service-name">Tarot Guidance</div>
+      <p class="service-desc">Focused readings for crossroads moments — relationships, career, transitions, and the questions that keep you awake at 3am.</p>
+      <div class="service-price">From ₹999 · 45 min</div>
+    </div>
+
+    <div class="service-item" onclick="openModal()">
+      <svg class="service-glyph" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="16" r="7" stroke="#b8912a" stroke-width="1"/>
+        <circle cx="32" cy="32" r="7" stroke="#b8912a" stroke-width="1"/>
+        <line x1="23" y1="16" x2="44" y2="16" stroke="#b8912a" stroke-width="0.8"/>
+        <line x1="4" y1="32" x2="25" y2="32" stroke="#b8912a" stroke-width="0.8"/>
+        <line x1="21" y1="21" x2="27" y2="27" stroke="#b8912a" stroke-width="0.8"/>
+      </svg>
+      <div class="service-name">Numerology Report</div>
+      <p class="service-desc">Your name and birthdate carry vibrational codes. Discover your life path number, personal year, and soul urge in a written report.</p>
+      <div class="service-price">From ₹799 · Written report</div>
+    </div>
+
+    <div class="service-item" onclick="openModal()">
+      <svg class="service-glyph" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="24,4 44,34 4,34" fill="none" stroke="#b8912a" stroke-width="1"/>
+        <polygon points="24,44 44,14 4,14" fill="none" stroke="#b8912a" stroke-width="1"/>
+        <circle cx="24" cy="24" r="8" stroke="#b8912a" stroke-width="0.8"/>
+        <circle cx="24" cy="24" r="2" fill="#b8912a"/>
+      </svg>
+      <div class="service-name">Sacred Geometry</div>
+      <p class="service-desc">Personalised geometric symbols for meditation spaces, homes, and altars. Each design is consecrated to your specific intention.</p>
+      <div class="service-price">From ₹2,499 · Digital + Print</div>
+    </div>
+
+    <div class="service-item" onclick="openModal()">
+      <svg class="service-glyph" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 38 C 8 20, 16 12, 24 8 C 32 12, 40 20, 40 38" stroke="#b8912a" stroke-width="1" fill="none"/>
+        <line x1="8" y1="38" x2="40" y2="38" stroke="#b8912a" stroke-width="1"/>
+        <line x1="24" y1="8" x2="24" y2="38" stroke="#b8912a" stroke-width="0.6"/>
+        <line x1="16" y1="14" x2="32" y2="14" stroke="#b8912a" stroke-width="0.5"/>
+        <line x1="11" y1="24" x2="37" y2="24" stroke="#b8912a" stroke-width="0.5"/>
+      </svg>
+      <div class="service-name">Online Courses</div>
+      <p class="service-desc">Self-paced deep dives into Western astrology, tarot philosophy, and the Hermetic tradition. Structured for beginners and intermediates alike.</p>
+      <div class="service-price">From ₹3,999 · Lifetime access</div>
+    </div>
+
+    <div class="service-item" onclick="openModal()">
+      <svg class="service-glyph" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 42 L10 18 L24 6 L38 18 L38 42 Z" stroke="#b8912a" stroke-width="1" fill="none"/>
+        <rect x="18" y="28" width="12" height="14" stroke="#b8912a" stroke-width="0.8" fill="none"/>
+        <circle cx="24" cy="18" r="3" stroke="#b8912a" stroke-width="0.8"/>
+      </svg>
+      <div class="service-name">The Ritual Shop</div>
+      <p class="service-desc">Curated tools for your practice — hand-selected oracle decks, ritual journals, resin-cast sigil tiles, and hand-bound grimoires.</p>
+      <div class="service-price">Opening soon</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="border-top: 1px solid rgba(184,145,42,0.12);">
+  <div class="section-label reveal">About</div>
+  <div class="about-grid">
+    <div class="about-image-placeholder reveal">
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="100" cy="100" r="90" stroke="#b8912a" stroke-width="1"/>
+        <polygon points="100,20 172,150 28,150" fill="none" stroke="#b8912a" stroke-width="1"/>
+        <polygon points="100,180 172,50 28,50" fill="none" stroke="#b8912a" stroke-width="1"/>
+        <circle cx="100" cy="100" r="30" stroke="#b8912a" stroke-width="0.8"/>
+        <circle cx="100" cy="100" r="5" fill="#b8912a"/>
+      </svg>
+      <div class="about-image-label">[ Your portrait here ]</div>
+    </div>
+    <div class="about-text reveal">
+      <div class="section-label">The Practitioner</div>
+      <h2 class="section-title">Rooted in <em>tradition</em>,<br>present to your life</h2>
+      <p>I've spent over a decade in the libraries and lineages of Western esotericism — studying under astrologers trained in the Hellenistic tradition, working through the Rider-Waite-Smith corpus, and immersing myself in Jungian depth psychology as a companion lens.</p>
+      <p>My practice is not fortune-telling. It is <strong>a structured method for self-knowledge</strong> — using ancient symbolic systems to illuminate patterns, tendencies, and possibilities that are already present in your life, waiting to be named.</p>
+      <p>I work with clients across India and internationally, holding space for the full complexity of a human life. Sessions are confidential, non-dogmatic, and grounded in genuine care.</p>
+      <div class="about-tags">
+        <span class="about-tag">Western Astrology</span>
+        <span class="about-tag">Tarot</span>
+        <span class="about-tag">Numerology</span>
+        <span class="about-tag">Hermeticism</span>
+        <span class="about-tag">Sacred Geometry</span>
+        <span class="about-tag">Jungian Symbolism</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<div class="process-band full-width-section" id="process">
+  <div style="max-width:1140px; margin:0 auto;">
+    <div class="section-label reveal">How it works</div>
+    <h2 class="section-title reveal">The <em>journey</em> of a session</h2>
+    <div class="process-steps reveal">
+      <div class="process-step">
+        <div class="step-number">01</div>
+        <div class="step-title">Book &amp; Share</div>
+        <p class="step-desc">Choose your service and fill in a short intake form — birth details, your question, what you're navigating. Nothing is too much.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">02</div>
+        <div class="step-title">Preparation</div>
+        <p class="step-desc">I spend time with your chart or question before we meet — so we arrive ready to go deep rather than warm up.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">03</div>
+        <div class="step-title">The Session</div>
+        <p class="step-desc">We meet via video or voice. I share what I've found, you ask freely, and we explore together. Sessions are recorded for you.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">04</div>
+        <div class="step-title">Integration</div>
+        <p class="step-desc">You receive a written summary within 48 hours, along with resources to carry the insights forward into everyday life.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section>
+  <div class="section-label reveal">Voices</div>
+  <h2 class="section-title reveal">What clients <em>say</em></h2>
+  <div class="testimonials-grid reveal">
+    <div class="tcard">
+      <div class="tcard-stars">
+        <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5 4.5 4z"/></svg>
+        <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5 4.5 4z"/></svg>
+        <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5 4.5 4z"/></svg>
+        <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5 4.5 4z"/></svg>
+        <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5 4.5 4z"/></svg>
+      </div>
+      <blockquote>"The natal chart reading was unlike anything I had experienced before — precise, compassionate, and genuinely illuminating. I came in sceptical and left with a language for things I had felt but never been able to name."</blockquote>
+      <div class="tcard-author">Priya M.</div>
+      <div class="tcard-detail">Mumbai · Natal Chart Reading</div>
+    </div>
+    <div class="tcard">
+      <div class="tcard-stars">
+        <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5 4.5 4z"/></svg>
+        <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5 4.5 4z"/></svg>
+        <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5 4.5 4z"/></svg>
+        <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5 4.5 4z"/></svg>
+        <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5 4.5 4z"/></svg>
+      </div>
+      <blockquote>"I booked a tarot session at a major career crossroads. The clarity I received helped me make a decision I had been avoiding for months. The written summary alone was worth it — I still re-read it."</blockquote>
+      <div class="tcard-author">Rahul S.</div>
+      <div class="tcard-detail">Bengaluru · Tarot Guidance</div>
+    </div>
+    <div class="tcard">
+      <div class="tcard-stars">
+        <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5 4.5 4z"/></svg>
+        <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5 4.5 4z"/></svg>
+        <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5 4.5 4z"/></svg>
+        <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5 4.5 4z"/></svg>
+        <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5 4.5 4z"/></svg>
+      </div>
+      <blockquote>"The sacred geometry piece I commissioned is one of the most meaningful objects I own. Every element was chosen with intention. Completely unique — nothing like what you'd find anywhere else."</blockquote>
+      <div class="tcard-author">Ananya K.</div>
+      <div class="tcard-detail">Delhi · Sacred Geometry</div>
+    </div>
+    <div class="tcard">
+      <div class="tcard-stars">
+        <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5 4.5 4z"/></svg>
+        <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5 4.5 4z"/></svg>
+        <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5 4.5 4z"/></svg>
+        <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5 4.5 4z"/></svg>
+        <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 9l-3 1.5.5-3.5L1 4.5 4.5 4z"/></svg>
+      </div>
+      <blockquote>"The astrology course changed how I relate to time, to seasons, to myself. It is genuinely one of the best investments I have made in my inner life. Rigorous and beautiful at once."</blockquote>
+      <div class="tcard-author">Dev R.</div>
+      <div class="tcard-detail">Pune · Online Course</div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNAL/BLOG -->
+<section id="journal" style="border-top: 1px solid rgba(184,145,42,0.12);">
+  <div class="section-label reveal">Journal</div>
+  <h2 class="section-title reveal">Recent <em>writings</em></h2>
+  <div class="blog-grid reveal">
+    <div class="blog-card">
+      <div class="blog-tag">Astrology</div>
+      <div class="blog-title">Saturn Returns and the Architecture of Maturity</div>
+      <p class="blog-excerpt">Every 29 years, Saturn returns to the place it occupied at your birth. Why this transit is the most important of your adult life.</p>
+      <a href="#" class="blog-read">Read more &rarr;</a>
+    </div>
+    <div class="blog-card">
+      <div class="blog-tag">Tarot</div>
+      <div class="blog-title">The High Priestess Is Not Mystical — She Is Attentive</div>
+      <p class="blog-excerpt">A re-reading of one of the most misunderstood cards in the major arcana, and what she actually wants you to do.</p>
+      <a href="#" class="blog-read">Read more &rarr;</a>
+    </div>
+    <div class="blog-card">
+      <div class="blog-tag">Philosophy</div>
+      <div class="blog-title">What the Hermetic Tradition Actually Teaches About Reality</div>
+      <p class="blog-excerpt">Not mysticism — a coherent philosophy of correspondence, vibration, and mental causation that holds up surprisingly well.</p>
+      <a href="#" class="blog-read">Read more &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<div class="cta-section" id="contact">
+  <svg class="cta-symbol" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="40" cy="40" r="36" stroke="#b8912a" stroke-width="1"/>
+    <polygon points="40,8 68,56 12,56" fill="none" stroke="#b8912a" stroke-width="1"/>
+    <polygon points="40,72 68,24 12,24" fill="none" stroke="#b8912a" stroke-width="1"/>
+    <circle cx="40" cy="40" r="8" stroke="#b8912a" stroke-width="0.8"/>
+    <circle cx="40" cy="40" r="2" fill="#b8912a"/>
+  </svg>
+  <h2>Something in you is<br><em>already asking</em></h2>
+  <p>The inquiry that brought you here is worth honouring. Let's explore what the symbols have to say about where you are and where you're going.</p>
+  <a href="#" class="btn-dark" onclick="openModal(event)">Book a Session</a>
+</div>
+
+<!-- NEWSLETTER -->
+<div class="newsletter">
+  <h3>The Arcana Letter</h3>
+  <p>Monthly dispatches on astrology, tarot, and the inner life. No noise, no selling.</p>
+  <div class="newsletter-form">
+    <input type="email" placeholder="Your email address">
+    <button type="button">Subscribe</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo">Arcana <span>✦</span> Studio</div>
+      <p>Occult science and esoteric arts for the sincere seeker. Based in India, available worldwide.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#">Natal chart reading</a></li>
+        <li><a href="#">Tarot guidance</a></li>
+        <li><a href="#">Numerology report</a></li>
+        <li><a href="#">Sacred geometry</a></li>
+        <li><a href="#">Online courses</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Studio</h4>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Journal</a></li>
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Newsletter</a></li>
+        <li><a href="#">YouTube</a></li>
+        <li><a href="#">Email</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Arcana Studio. All rights reserved.</div>
+    <div class="footer-social">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Instagram</a>
+    </div>
+  </div>
+</footer>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h2>Book a Session</h2>
+    <p class="modal-sub">Fill in the details below and I'll be in touch within 24 hours to confirm.</p>
+
+    <div class="form-grid">
+      <div class="form-row">
+        <label>First name</label>
+        <input type="text" placeholder="Your name">
+      </div>
+      <div class="form-row">
+        <label>Email</label>
+        <input type="email" placeholder="your@email.com">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label>Service</label>
+      <select>
+        <option value="">Choose a service...</option>
+        <option>Natal chart reading — ₹1,999</option>
+        <option>Tarot guidance — ₹999</option>
+        <option>Numerology report — ₹799</option>
+        <option>Sacred geometry — ₹2,499</option>
+        <option>Online course — ₹3,999</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <label>Date of birth (for chart readings)</label>
+      <input type="text" placeholder="DD / MM / YYYY, HH:MM, City">
+    </div>
+
+    <div class="form-row">
+      <label>What are you navigating?</label>
+      <textarea placeholder="Share as much or as little as you'd like..."></textarea>
+    </div>
+
+    <button class="form-submit" onclick="submitForm()">Send Inquiry</button>
+  </div>
+</div>
+
+<script>
+  function openModal(e) {
+    if (e) e.preventDefault();
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('modal')) closeModal();
+  }
+
+  function submitForm() {
+    alert('Thank you — your inquiry has been sent. I will be in touch within 24 hours.');
+    closeModal();
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
